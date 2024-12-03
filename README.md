@@ -1,3 +1,5 @@
+![image](https://github.com/user-attachments/assets/20f0d046-aa89-43ed-bbce-e06bf5111710)
+
 # AWS Continuous Integration and Continuous Delivery
 
 ## Create an AWS CodePipeline
