@@ -31,17 +31,73 @@ In this step, we'll configure AWS CodeBuild to build our Python application base
 - Select the pipeline you created in the previous step.
 - Configure the build environment, such as the operating system, runtime, and compute resources required for your Python application.
 - Specify the build commands, such as installing dependencies and running tests. Customize this based on your application's requirements.
-- Set up the artifacts configuration to generate the build output required for deployment.
+- Set up the artifacts configuration to generate the deployment's required build output.
 - Review the build project settings and click on the "Create build project" button to create your AWS CodeBuild project.
 
-Fantastic! With AWS CodeBuild all set up, we're now ready to witness the magic of continuous integration in action.
+Fantastic! With AWS CodeBuild all setup, we're now ready to witness the magic of continuous integration in action.
 
 ## Trigger the CI Process
-
-In this final step, we'll trigger the CI process by making a change to our GitHub repository. Let's see how it works:
+ We'll trigger the CI process by making a change to our GitHub repository. Let's see how it works:
 
 - Go to your GitHub repository and make a change to your Python application's source code. It could be a bug fix, a new feature, or any other change you want to introduce.
 - Commit and push your changes to the branch configured in your AWS CodePipeline.
 - Head over to the AWS CodePipeline console and navigate to your pipeline.
 - You should see the pipeline automatically kick off as soon as it detects the changes in your repository.
 - Sit back and relax while AWS CodePipeline takes care of the rest. It will fetch the latest code, trigger the build process with AWS CodeBuild, and deploy the application if you configured the deployment stage.
+
+## Configure AWS CodeDeploy
+In This process, we Deploy our application in the EC2 instance.
+
+- In the AWS Management Console, navigate to the AWS CodeDeploy service.
+- Click on the "Create Deploy application" button.
+- Select the compute platform EC2 Instance.
+- Then create the application.
+  
+## Create and Configure EC2 Instance
+In this process, we create and configure the Ec2 Instance and also deploy the agent.
+
+- In the AWS Management Console, navigate to the AWS EC2 service.
+- Click on the Create EC2 instance button.
+- provide the os ubuntu image with basic config
+- Enable auto-assign public IP address
+- Create a new tag using managed tags and provide the key and value.
+- Login to the EC2 Iantance and install codeDeploy agent
+
+## Install the CodeDeploy agent for Ubuntu Server
+- Sign in to the instance.
+- Enter the following commands, one after the other:
+  ~~~
+  sudo apt update
+  sudo apt install ruby-full
+  sudo apt install wget
+  ~~~
+- /home/ubuntu represents the default user name for an Ubuntu Server instance. If your instance was created using a custom AMI, the AMI owner might have specified a different default user name.
+ ~~~
+  cd /home/ubuntu
+ ~~~
+- In this step, bucket-name is the name of the Amazon S3 bucket that contains the CodeDeploy Resource Kit files for your region, and region-identifier is the identifier for your region.
+ ~~~
+wget https://bucket-name.s3.region-identifier.amazonaws.com/latest/install
+ ~~~
+- Change the permission
+  ~~~
+  chmod +x ./install
+  ~~~
+- To install the latest version of the CodeDeploy agent on any supported version of Ubuntu Server except 20.04:
+~~~
+sudo ./install auto
+~~~
+
+
+  
+
+
+
+
+
+
+  
+
+
+
+
