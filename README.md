@@ -87,6 +87,34 @@ wget https://bucket-name.s3.region-identifier.amazonaws.com/latest/install
 ~~~
 sudo ./install auto
 ~~~
+## Create Deployment group and deployment in EC2 Instance 
+
+- Permit to ec2 Instances that talk to CodeDeploy.
+- first, create a role that talks to code deploy and add permission EC2fullaccess
+- assign the role EC2>Intance>Actions>Security>ModifyIAMrole  update the role.
+- then restest the ec2 instance.
+- In Codedeploy we provide the target group
+- Go to Deployment groups and create Deployment group and provide the EC2 Instance
+- Enter the name of the Deployment group
+- add the same service role
+- Select the deployment types and choose simple In-place
+- Environment configurations select Ec2 Instance, add the tag, and create the deployment group.
+- Now create the deployment
+- provide the deployment group
+- then provide the applications hosted group, which, in my case is GitHub
+- add the GitHub details and commits ID to check
+- appspec.yaml file will root file space GitHub
+- also add the docker start and stop the container.sh
+- and also install docker in EC2 Iantance
+- Run deployment is a success.
+- Add one more step in the code pipeline
+- Edit the pipeline and add stage code-deploy
+- provide AWS action AWS code-deploy
+- Select the Application name and deployment group and Done 
+  
+  
+  
+   
 
 
   
